@@ -1,5 +1,6 @@
+import { useState } from "react";
 import {
-  Button,
+  Alert,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -14,23 +15,23 @@ import {
 import Svg, { Path } from "react-native-svg";
 
 import { colors } from "../styles/global";
-import { useState } from "react";
 
-export default function RegistrationScreen() {
-  const [login, setLogin] = useState("");
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordIsVisible, setPasswordIsVisible] = useState(true);
+  const [userPicture, setUserPicture] = useState(require("./my_pict.jpg"));
+  //   const [userPicture, setUserPicture] = useState(null);
   const showPassword = (
     <TouchableOpacity onPress={() => setPasswordIsVisible((prev) => !prev)}>
       <Text style={styles.showPassword}>Показати</Text>
     </TouchableOpacity>
   );
-  const handleLoginChange = (value) => setLogin(value);
+
   const handleEmailChange = (value) => setEmail(value);
   const handlePasswordChange = (value) => setPassword(value);
-  const onLogin = () => console.log("Go to login page");
-  const onRegister = () => console.log(`login: ${login}`);
+  const onLogin = () => console.log(`email: ${email}, password: ${password}`);
+  const onRegister = () => console.log("Go to registration page");
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -43,7 +44,11 @@ export default function RegistrationScreen() {
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
           <View style={styles.pictureContainer}>
-            <View style={styles.userPicture}></View>
+            <View style={styles.userPicture}>
+              {userPicture && (
+                <Image source={userPicture} style={styles.userPicture} />
+              )}
+            </View>
             <View style={styles.addContainer}>
               <View>
                 <Svg
@@ -63,19 +68,13 @@ export default function RegistrationScreen() {
               </View>
             </View>
           </View>
-          <Text style={styles.formTitle}>Реєстрація</Text>
+          <Text style={styles.formTitle}>Увійти</Text>
           <View style={styles.inputsContainer}>
-            <TextInput
-              placeholder="Логін"
-              style={styles.inputStyle}
-              value={login}
-              autoFocus={true}
-              onChangeText={handleLoginChange}
-            />
             <TextInput
               placeholder="Адреса електронної пошти"
               style={styles.inputStyle}
               value={email}
+              autoFocus={true}
               onChangeText={handleEmailChange}
             />
             <View style={[styles.inputStyle, styles.inputPasswordStyle]}>
@@ -89,15 +88,14 @@ export default function RegistrationScreen() {
               {showPassword}
             </View>
           </View>
-          <TouchableOpacity style={styles.buttonStyle} onPress={onRegister}>
-            <Text style={styles.buttonTextStyle}>Зареєструватися</Text>
+          <TouchableOpacity style={styles.buttonStyle} onPress={onLogin}>
+            <Text style={styles.buttonTextStyle}>Увійти</Text>
           </TouchableOpacity>
-          <View style={styles.haveAccountContainer}>
-            <Text style={styles.haveAccount}>Вже є акаунт?</Text>
-            <TouchableOpacity onPress={onLogin}>
+          <View style={styles.noAccountContainer}>
+            <Text style={styles.haveAccount}>Немає акаунту?</Text>
+            <TouchableOpacity onPress={onRegister}>
               <Text style={[styles.haveAccount, styles.haveAccountLink]}>
-                {"\u00A0"}
-                Увійти
+                {"\u00A0"} Зареєструватися
               </Text>
             </TouchableOpacity>
           </View>
@@ -115,7 +113,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     position: "relative",
-    height: "67%",
+    height: "60%",
     paddingTop: 92,
     paddingLeft: 16,
     paddingRight: 16,
@@ -144,6 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightestGray,
     borderRadius: 16,
   },
+  userPictureStyle: { width: "100%" },
   addContainer: {
     position: "absolute",
     right: 0,
@@ -211,7 +210,6 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     lineHeight: 19,
   },
-  haveAccountContainer: { flexDirection: "row", alignSelf: "center" },
   haveAccount: {
     textAlign: "center",
     fontSize: 16,
@@ -220,4 +218,8 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   haveAccountLink: { textDecorationLine: "underline" },
+  noAccountContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
+  },
 });
