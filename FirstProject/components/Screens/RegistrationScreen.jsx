@@ -4,6 +4,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -30,7 +32,8 @@ export default function RegistrationScreen() {
   const handleEmailChange = (value) => setEmail(value);
   const handlePasswordChange = (value) => setPassword(value);
   const onLogin = () => console.log("Go to login page");
-  const onRegister = () => console.log(`login: ${login}`);
+  const onRegister = () =>
+    console.log(`login: ${login} email: ${email} password: ${password}`);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
