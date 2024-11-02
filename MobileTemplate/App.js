@@ -7,11 +7,15 @@ import RegistrationScreen from "./screens/RegistrationScreen";
 import LoginScreen from "./screens/LoginScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import StackNavigator from "./navigation/StackNavigator";
+import PostsScreen from "./screens/PostsScreen";
+import CreatePostsScreen from "./screens/CreatePostsScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" />;
@@ -19,10 +23,12 @@ export default function App() {
   // return <RegistrationScreen />;
   // return <LoginScreen />;
   return (
-    <NavigationContainer>
-      {/* <BottomTabNavigator /> */}
-      <StackNavigator />
-    </NavigationContainer>
+    // <PostsScreen />
+    <HomeScreen />
+    // <NavigationContainer>
+    //   {/* <BottomTabNavigator /> */}
+    //   <StackNavigator />
+    // </NavigationContainer>
   );
 }
 

@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     alignItems: "center",
     borderRadius: 100,
-    backgroundColor: "#FF6C00",
+    backgroundColor: colors.orange,
   },
 
   buttonTextStyle: {
