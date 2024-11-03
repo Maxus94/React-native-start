@@ -49,7 +49,7 @@ export default function CommentsScreen() {
         {comments.map((comment) => (
           <View style={styles.commentWrapper} key={comment.ID}>
             <Image source={comment.userPicture} />
-            <View>
+            <View style={styles.commentTextContainer}>
               <Text>{comment.commentText}</Text>
               <Text>
                 {comment.commentDate}|{comment.commentTime}
@@ -64,6 +64,7 @@ export default function CommentsScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    // maxWidth: SCREEN_WIDTH,
     height: "100%",
     paddingTop: 120,
     paddingBottom: 34,
@@ -72,8 +73,7 @@ const styles = StyleSheet.create({
     gap: 32,
   },
   picture: {
-    maxWidth: SCREEN_WIDTH - 32,
-    // height: 240,
+    width: "100%",
     backgroundColor: colors.lightestGray,
     borderRadius: 8,
     borderColor: colors.lightGray,
@@ -81,10 +81,18 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   commentsContainer: {
+    // width: "100%",
     gap: 24,
+    backgroundColor: "green",
   },
   commentWrapper: {
     flexDirection: "row",
     gap: 16,
+    // width: "100%",
+  },
+  commentTextContainer: {
+    // backgroundColor: colors.grey_transparent,
+    backgroundColor: "teal",
+    // padding: 16,
   },
 });

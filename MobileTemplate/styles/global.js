@@ -6,4 +6,5 @@ export const colors = {
   lightestGray: "#F6F6F6",
   lightGray: "#E8E8E8",
   darkGray: "#BDBDBD",
+  grey_transparent: "rgba(0, 0, 0, 0.03)",
 };

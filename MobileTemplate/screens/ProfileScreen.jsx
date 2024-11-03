@@ -51,6 +51,7 @@ export default function ProfileScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        {/* <Flatlist */}
         <View>
           <Image
             source={require("../assets/images/BackgroundPicture.jpg")}
