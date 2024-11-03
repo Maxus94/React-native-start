@@ -10,6 +10,8 @@ import StackNavigator from "./navigation/StackNavigator";
 import PostsScreen from "./screens/PostsScreen";
 import CreatePostsScreen from "./screens/CreatePostsScreen";
 import HomeScreen from "./screens/HomeScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import CommentsScreen from "./screens/CommentsScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +26,7 @@ export default function App() {
   // return <LoginScreen />;
   return (
     // <PostsScreen />
-    <HomeScreen />
+    <CommentsScreen />
     // <NavigationContainer>
     //   {/* <BottomTabNavigator /> */}
     //   <StackNavigator />
