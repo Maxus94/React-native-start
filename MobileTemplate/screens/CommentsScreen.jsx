@@ -1,7 +1,10 @@
 import { useState } from "react";
 import {
   Dimensions,
+  FlatList,
   Image,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -40,32 +43,50 @@ const comments = [
 
 export default function CommentsScreen() {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.picture}
-        source={require("../assets/images/sunset.png")}
-      />
-      <View style={styles.commentsContainer}>
-        {comments.map((comment) => (
-          <View style={styles.commentWrapper} key={comment.ID}>
-            <Image source={comment.userPicture} />
-            <View style={styles.commentTextContainer}>
-              <Text>{comment.commentText}</Text>
-              <Text>
-                {comment.commentDate}|{comment.commentTime}
-              </Text>
-            </View>
-          </View>
-        ))}
-      </View>
-    </View>
+    <SafeAreaView>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Image
+          style={styles.picture}
+          source={require("../assets/images/sunset.png")}
+        />
+        <View style={styles.commentsContainer}>
+          {comments.map((comment) =>
+            comment.ID % 2 ? (
+              <View style={styles.commentWrapper} key={comment.ID}>
+                <Image source={comment.userPicture} />
+                <View style={styles.commentTextContainer}>
+                  <Text>{comment.commentText}</Text>
+                  <Text style={styles.dateContainer}>
+                    {comment.commentDate} | {comment.commentTime}
+                  </Text>
+                </View>
+              </View>
+            ) : (
+              <View
+                style={[styles.commentWrapper, styles.commentWrapperRight]}
+                key={comment.ID}
+              >
+                <Image source={comment.userPicture} />
+                <View style={styles.commentTextContainer}>
+                  <Text>{comment.commentText}</Text>
+                  <Text
+                    style={[styles.dateContainer, styles.dateContainerRight]}
+                  >
+                    {comment.commentDate} | {comment.commentTime}
+                  </Text>
+                </View>
+              </View>
+            )
+          )}
+        </View>
+        <TextInput style={styles.commentInput}></TextInput>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // maxWidth: SCREEN_WIDTH,
-    height: "100%",
     paddingTop: 120,
     paddingBottom: 34,
     paddingLeft: 16,
@@ -81,18 +102,33 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   commentsContainer: {
-    // width: "100%",
     gap: 24,
-    backgroundColor: "green",
   },
   commentWrapper: {
     flexDirection: "row",
     gap: 16,
     // width: "100%",
   },
+  commentWrapperRight: {
+    flexDirection: "row-reverse",
+  },
   commentTextContainer: {
-    // backgroundColor: colors.grey_transparent,
-    backgroundColor: "teal",
-    // padding: 16,
+    backgroundColor: colors.grey_transparent,
+    flex: 1,
+    padding: 16,
+    gap: 8,
+  },
+  dateContainer: {
+    width: "100%",
+    textAlign: "right",
+    fontSize: 10,
+    color: colors.darkGray,
+  },
+  dateContainerRight: {
+    textAlign: "left",
+  },
+  commentInput: {
+    height: 50,
+    backgroundColor: colors.lightestGray,
   },
 });
